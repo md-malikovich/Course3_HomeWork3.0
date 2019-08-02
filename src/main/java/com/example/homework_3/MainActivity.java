@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,50 +42,17 @@ public class MainActivity extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text1 = name.getText().toString();
-                String text2 = secondName.getText().toString();
-                String text3 = thirdName.getText().toString();
-                Intent intent = new Intent();
-                intent.putExtra("key1", text1);
-                intent.putExtra("key2", text2);
-                intent.putExtra("key3", text3);
-                //intent.putExtra(Intent.EXTRA_TEXT, "___");
-                intent.setAction(Intent.ACTION_SEND);
-                intent.setType("text/plain");
 
-                if (intent.resolveActivity(getPackageManager()) != null) {
+                Intent intent = new Intent();
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, name.getText().toString() + " " + secondName.getText().toString() + " " + thirdName.getText().toString());
+                intent.setAction(Intent.ACTION_SEND);
+                startActivity(Intent.createChooser(intent, "Share with"));
+
+                if(intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                    Log.d("ololo", text1);
                 }
             }
         });
     }
 }
-
-/*
-        save = findViewById(R.id.save);
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text1 = name.getText().toString();
-                Intent intent1 = new Intent();
-                intent1.putExtra("key", text1);
-                setResult(RESULT_OK, intent1);
-                finish();
-
-                String text2 = secondName.getText().toString();
-                Intent intent2 = new Intent();
-                intent2.putExtra("key", text2);
-                setResult(RESULT_OK, intent2);
-                finish();
-
-                String text3 = thirdName.getText().toString();
-                Intent intent3 = new Intent();
-                intent3.putExtra("key", text3);
-                setResult(RESULT_OK, intent3);
-                finish();
-
-            }
-        });
- */

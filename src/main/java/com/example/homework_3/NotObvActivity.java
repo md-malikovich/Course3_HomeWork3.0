@@ -30,34 +30,13 @@ public class NotObvActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String text1 = name.getText().toString();
-                String text2 = secondName.getText().toString();
-                String text3 = thirdName.getText().toString();
-                Intent intent = new Intent();
-                intent.putExtra("key1", text1);
-                intent.putExtra("key2", text2);
-                intent.putExtra("key3", text3);
-                //intent.putExtra(Intent.EXTRA_TEXT, "___");                                   // ДОЛЖЕН ОТПРАВЛЯТЬ ФИО!!!
-                intent.setAction(Intent.ACTION_SEND);
-                intent.setType("text/plain");
 
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                    Log.d("ololo", text2);
-
+                Intent intent = getIntent();
+                if(intent != null) {
+                    String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+                    Log.d("iii", text);
                 }
             }
         });
-
-
     }
-
 }
-
-/*
-        Intent intent = getIntent();
-        if (intent != null) {
-            String name = intent.getStringExtra(Intent.EXTRA_TEXT);
-            Log.d("iii", name);
-        }
- */
